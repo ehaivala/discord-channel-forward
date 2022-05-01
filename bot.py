@@ -1,5 +1,6 @@
-import os
 import logging
+import os
+from datetime import datetime
 
 import discord
 from dotenv import load_dotenv
@@ -18,7 +19,7 @@ client = discord.Client()
 @client.event
 async def on_message(message: discord.Message):
     if message.channel.name == FROM_CHANNEL:
-        logger.info(f'Processing message {message.id} from {message.author}')
+        logger.info(f'{datetime.utcnow()} - Processing message {message.id} from {message.author}')
         try:
             to_channel: discord.TextChannel = discord.utils.get(client.get_all_channels(), name=TO_CHANNEL)
             await to_channel.send(
